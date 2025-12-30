@@ -7,7 +7,9 @@ This project is a project I'm using in conjunction with NotebookLM to help me le
 ## Features
 
 - **Markdown Processing**: Converts markdown files to HTML with YAML frontmatter support
+- **Shortcodes**: Add dynamic content like YouTube videos, alerts, and retro effects
 - **Template System**: YAML-configured templates with variable substitution
+- **Plugins**: Extend functionality with sitemaps, RSS feeds, and search indexes
 - **Multiple Layouts**: Support for different page layouts (page, post, etc.)
 - **Flexible Navigation**: Easy customization of navigation menus in templates
 - **Asset Management**: Automatically copies CSS, JavaScript, and images to output
@@ -122,11 +124,11 @@ Navigation is simple to customize in your view templates. Just edit the navigati
 
 ```html
 <nav>
-    <a href="/">Home</a>
-    <a href="/blog/">Blog</a>
-    <a href="/about.html">About</a>
-    <a href="/projects/">Projects</a>
-    <a href="/contact.html">Contact</a>
+  <a href="/">Home</a>
+  <a href="/blog/">Blog</a>
+  <a href="/about.html">About</a>
+  <a href="/projects/">Projects</a>
+  <a href="/contact.html">Contact</a>
 </nav>
 ```
 
@@ -136,15 +138,16 @@ You can create different navigation menus for different layouts (page vs. post) 
 
 ```html
 <nav>
-    <a href="/">Home</a>
-    <a href="/blog/">All Posts</a>
-    <a href="/recipes/">Recipes</a>
-    <a href="/travel/">Travel</a>
-    <a href="/about.html">About</a>
+  <a href="/">Home</a>
+  <a href="/blog/">All Posts</a>
+  <a href="/recipes/">Recipes</a>
+  <a href="/travel/">Travel</a>
+  <a href="/about.html">About</a>
 </nav>
 ```
 
 Then organize your content:
+
 ```
 contents/
 ├── index.md
@@ -168,7 +171,6 @@ contents/
 
 ## Requirements
 
-- macOS 13.0+
 - Swift 5.10+
 
 ## License

@@ -3,6 +3,7 @@ import Foundation
 /// Orchestrates the site generation process
 class SiteGenerator {
     let workingDirectory: URL
+    private var pluginManager: PluginManager?
 
     init(workingDirectory: URL) {
         self.workingDirectory = workingDirectory
@@ -32,6 +33,22 @@ class SiteGenerator {
         let templateConfig = try templateEngine.loadConfiguration()
         print("  ✓ Template '\(templateConfig.name)' loaded")
 
+        // 3. Initialize and load plugins
+        let outputDirectory = workingDirectory.appendingPathComponent("output")
+        let pluginContext = PluginContext(
+            workingDirectory: workingDirectory,
+            outputDirectory: outputDirectory,
+            templateDirectory: templateDir
+        )
+
+        if let pluginConfigs = templateConfig.plugins, !pluginConfigs.isEmpty {
+            print("\nLoading plugins...")
+            let manager = PluginManager(context: pluginContext)
+            manager.loadPlugins(from: pluginConfigs)
+            self.pluginManager = manager
+            try manager.beforeBuild()
+        }
+
         // 3. Scan and collect markdown files
         print("\nScanning for markdown files...")
         let scanner = DirectoryScanner(rootDirectory: contentsDir)
@@ -60,20 +77,20 @@ class SiteGenerator {
 
         // 7. Generate HTML output
         print("\nGenerating HTML output...")
-        let htmlRenderer = HTMLRenderer(templateEngine: templateEngine)
+        let htmlRenderer = HTMLRenderer(templateEngine: templateEngine, pluginManager: pluginManager)
         try htmlRenderer.render(site: site, to: workingDirectory)
 
         // 8. Generate directory index pages
         print("\nGenerating directory indexes...")
         let htmlTemplate = try templateEngine.loadOutputTemplate(named: "html")
-        let outputDirectory = workingDirectory.appendingPathComponent(htmlTemplate.outputPath)
+        let htmlOutputDirectory = workingDirectory.appendingPathComponent(htmlTemplate.outputPath)
         let indexGenerator = IndexGenerator(templateEngine: templateEngine, outputTemplate: htmlTemplate)
-        try indexGenerator.generateIndexPages(for: site, outputDirectory: outputDirectory)
+        try indexGenerator.generateIndexPages(for: site, outputDirectory: htmlOutputDirectory)
 
         // 9. Generate taxonomy pages (tags)
         print("\nGenerating tag pages...")
         let taxonomyGenerator = TaxonomyGenerator(templateEngine: templateEngine, outputTemplate: htmlTemplate)
-        try taxonomyGenerator.generateTagPages(for: site, outputDirectory: outputDirectory)
+        try taxonomyGenerator.generateTagPages(for: site, outputDirectory: htmlOutputDirectory)
 
         // 10. Copy assets
         print("\nCopying assets...")
@@ -81,6 +98,12 @@ class SiteGenerator {
         let assetsSource = templateDir.appendingPathComponent("assets")
         let assetsDestination = workingDirectory.appendingPathComponent("output/assets")
         try assetCopier.copyAssets(from: assetsSource, to: assetsDestination)
+
+        // 11. Run plugin afterBuild hooks
+        if let pluginManager = pluginManager {
+            print("\nRunning plugin post-build hooks...")
+            try pluginManager.afterBuild()
+        }
 
         print("\n✓ Generated \(pages.count) pages (build \(buildID))")
         print("Output directory: \(workingDirectory.appendingPathComponent("output").path)")

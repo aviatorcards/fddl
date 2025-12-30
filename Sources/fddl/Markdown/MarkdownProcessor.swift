@@ -4,6 +4,8 @@ import Yams
 
 /// Processes markdown files into Page objects
 class MarkdownProcessor {
+    private let shortcodeProcessor = ShortcodeProcessor()
+
     /// Process a markdown file into a Page
     func process(file: URL, relativeTo baseURL: URL) throws -> Page {
         // Read file content
@@ -12,8 +14,11 @@ class MarkdownProcessor {
         // Extract frontmatter if present
         let (frontMatter, markdown) = try extractFrontMatter(from: content)
 
-        // Parse markdown to HTML
+        // Parse markdown to HTML first
         let htmlContent = renderHTML(from: markdown)
+
+        // Process shortcodes in the HTML (after markdown rendering)
+        let processedHTML = shortcodeProcessor.process(htmlContent)
 
         // Calculate relative path
         let relativePath = file.path.replacingOccurrences(
@@ -28,7 +33,7 @@ class MarkdownProcessor {
         return Page(
             path: relativePath,
             frontMatter: frontMatter ?? .default,
-            content: htmlContent,
+            content: processedHTML,
             rawMarkdown: markdown,
             modifiedDate: modifiedDate
         )
@@ -74,6 +79,7 @@ class MarkdownProcessor {
 /// HTML renderer for markdown documents
 private struct MarkdownHTMLRenderer: MarkupWalker {
     private var html = ""
+    private let highlighter = SyntaxHighlighter()
 
     mutating func render(_ document: Document) -> String {
         html = ""
@@ -112,9 +118,18 @@ private struct MarkdownHTMLRenderer: MarkupWalker {
 
     mutating func visitCodeBlock(_ codeBlock: CodeBlock) -> () {
         let language = codeBlock.language ?? ""
-        html += "<pre><code class=\"language-\(language)\">"
-        html += codeBlock.code.htmlEscaped
-        html += "</code></pre>\n"
+        let code = codeBlock.code
+
+        if !language.isEmpty {
+            // Use syntax highlighter for known languages
+            html += highlighter.highlight(code: code, language: language)
+            html += "\n"
+        } else {
+            // No language specified, render as plain code
+            html += "<pre><code>"
+            html += code.htmlEscaped
+            html += "</code></pre>\n"
+        }
     }
 
     mutating func visitInlineCode(_ inlineCode: InlineCode) -> () {

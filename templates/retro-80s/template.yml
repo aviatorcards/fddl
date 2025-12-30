@@ -1,0 +1,67 @@
+name: "Retro 80s"
+version: "1.0"
+author: "fddl"
+description: "1980s computer aesthetic with CRT terminal colors and neon grid lines"
+defaultLayout: "page"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "retro-80s"
+  colors:
+    primary: "#ff1493"
+    secondary: "#00ffff"
+    accent: "#ffff00"
+    background: "#1a0033"
+    text: "#00ffff"
+    link: "#ff1493"
+    link_hover: "#ffff00"
+    border: "#ff1493"
+    code_background: "#0d001a"
+  typography:
+    font_family: "'VT323', 'Courier New', monospace"
+    heading_font: "'Press Start 2P', 'Courier New', monospace"
+    code_font: "'VT323', monospace"
+    base_font_size: "20px"
+    line_height: "1.5"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "32px"
+    xl: "64px"
+  custom_css:
+    text-shadow: "0 0 5px currentColor"
+    border-width: "3px"
+    border-style: "solid"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Retro 80s"
+      site_url: "https://example.com"
+      description: "Back to the future"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

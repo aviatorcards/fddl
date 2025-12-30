@@ -1,0 +1,66 @@
+name: "Vintage"
+version: "1.0"
+author: "fddl"
+description: "Vintage newspaper/print style with serif fonts and aged paper colors"
+defaultLayout: "post"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "vintage"
+  colors:
+    primary: "#3d2817"
+    secondary: "#8b7355"
+    accent: "#c19a6b"
+    background: "#f4e8d0"
+    text: "#3d2817"
+    link: "#8b4513"
+    link_hover: "#654321"
+    border: "#c19a6b"
+    code_background: "#e8dcc8"
+  typography:
+    font_family: "'Garamond', 'Georgia', 'Times New Roman', serif"
+    heading_font: "'Playfair Display', 'Georgia', serif"
+    code_font: "'Courier Prime', 'Courier New', monospace"
+    base_font_size: "18px"
+    line_height: "1.8"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "32px"
+    xl: "64px"
+  custom_css:
+    max-width: "800px"
+    text-rendering: "optimizeLegibility"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Vintage Chronicles"
+      site_url: "https://example.com"
+      description: "Stories from another time"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

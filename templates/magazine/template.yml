@@ -1,0 +1,66 @@
+name: "Magazine"
+version: "1.0"
+author: "fddl"
+description: "News/magazine style with multi-column layouts and featured content"
+defaultLayout: "post"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "magazine"
+  colors:
+    primary: "#c0392b"
+    secondary: "#95a5a6"
+    accent: "#e74c3c"
+    background: "#ffffff"
+    text: "#2c3e50"
+    link: "#c0392b"
+    link_hover: "#e74c3c"
+    border: "#bdc3c7"
+    code_background: "#ecf0f1"
+  typography:
+    font_family: "'Merriweather', 'Georgia', serif"
+    heading_font: "'Oswald', 'Arial Black', sans-serif"
+    code_font: "'Courier New', monospace"
+    base_font_size: "17px"
+    line_height: "1.7"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "32px"
+    xl: "48px"
+  custom_css:
+    max-width: "1200px"
+    column-gap: "32px"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Magazine"
+      site_url: "https://example.com"
+      description: "Latest news and articles"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

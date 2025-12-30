@@ -15,6 +15,8 @@ struct TemplateConfiguration: Codable {
     let defaultLayout: String?
     let outputs: [String]
     let navigation: [NavigationItem]
+    let theme: Theme?
+    let plugins: [PluginConfig]?
 
     enum CodingKeys: String, CodingKey {
         case name
@@ -24,6 +26,8 @@ struct TemplateConfiguration: Codable {
         case defaultLayout
         case outputs
         case navigation
+        case theme
+        case plugins
     }
 
     static var `default`: TemplateConfiguration {
@@ -34,8 +38,15 @@ struct TemplateConfiguration: Codable {
             description: nil,
             defaultLayout: "page",
             outputs: ["html"],
-            navigation: []
+            navigation: [],
+            theme: nil,
+            plugins: nil
         )
+    }
+
+    /// Get the active theme (from config or use modern as default)
+    var activeTheme: Theme {
+        theme ?? .modern
     }
 }
 

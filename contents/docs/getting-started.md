@@ -43,6 +43,18 @@ Or specify a template:
 ./fddl --template default
 ```
 
+## Build System & Versioning
+
+Every site generation is automatically trackable. `fddl` generates a unique **Build ID** and captures the current **Git Commit Hash** to ensure you always know exactly which version of your code produced which version of your site.
+
+These variables are exposed via:
+
+- `{{site.buildID}}`
+- `{{site.commitHash}}`
+- `{{site.generatedDate}}`
+
 ## Next Steps
 
-Check out the [Configuration Guide](/docs/configuration.html) to learn how to customize your site settings.
+- [Configuration Guide](/docs/configuration.html)
+- [Shortcodes Reference](/docs/shortcodes.html)
+- [Templating Engine](/docs/templates.html)

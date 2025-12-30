@@ -1,0 +1,66 @@
+name: "Docs"
+version: "1.0"
+author: "fddl"
+description: "Technical documentation theme with strong navigation and code focus"
+defaultLayout: "doc"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "docs"
+  colors:
+    primary: "#0066cc"
+    secondary: "#6c757d"
+    accent: "#17a2b8"
+    background: "#f8f9fa"
+    text: "#212529"
+    link: "#0066cc"
+    link_hover: "#0052a3"
+    border: "#dee2e6"
+    code_background: "#ffffff"
+  typography:
+    font_family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+    heading_font: "'Inter', -apple-system, sans-serif"
+    code_font: "'Fira Code', 'Consolas', monospace"
+    base_font_size: "16px"
+    line_height: "1.6"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "24px"
+    xl: "48px"
+  custom_css:
+    sidebar-width: "260px"
+    content-max-width: "900px"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Documentation"
+      site_url: "https://example.com"
+      description: "Technical documentation"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

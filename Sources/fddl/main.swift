@@ -5,7 +5,7 @@ struct FDDL: ParsableCommand {
         commandName: "fddl",
         abstract: "A markdown-based static site generator",
         version: "0.1.0",
-        subcommands: [Generate.self, Version.self],
+        subcommands: [Generate.self, Serve.self, Deploy.self, Version.self],
         defaultSubcommand: Generate.self
     )
 }

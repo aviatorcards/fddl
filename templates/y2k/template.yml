@@ -1,0 +1,66 @@
+name: "Y2K"
+version: "1.0"
+author: "fddl"
+description: "Y2K/early 2000s style with gradients, metallic effects, and bubbly designs"
+defaultLayout: "page"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "y2k"
+  colors:
+    primary: "#ff69b4"
+    secondary: "#9370db"
+    accent: "#00bfff"
+    background: "#f0e6ff"
+    text: "#4a0080"
+    link: "#ff69b4"
+    link_hover: "#ff1493"
+    border: "#9370db"
+    code_background: "#ffffff"
+  typography:
+    font_family: "'Comic Sans MS', 'Chalkboard', sans-serif"
+    heading_font: "'Impact', 'Arial Black', sans-serif"
+    code_font: "'Courier New', monospace"
+    base_font_size: "15px"
+    line_height: "1.6"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "24px"
+    xl: "48px"
+  custom_css:
+    border-radius: "20px"
+    text-shadow: "1px 1px 2px rgba(255, 255, 255, 0.8)"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Y2K Site"
+      site_url: "https://example.com"
+      description: "Welcome to my homepage!"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

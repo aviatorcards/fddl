@@ -3,9 +3,11 @@ import Foundation
 /// Renders HTML pages from markdown content using templates
 class HTMLRenderer {
     let templateEngine: TemplateEngine
+    weak var pluginManager: PluginManager?
 
-    init(templateEngine: TemplateEngine) {
+    init(templateEngine: TemplateEngine, pluginManager: PluginManager? = nil) {
         self.templateEngine = templateEngine
+        self.pluginManager = pluginManager
     }
 
     /// Render all pages in a site to HTML files
@@ -37,8 +39,14 @@ class HTMLRenderer {
 
     /// Render a single page to HTML
     private func renderPage(_ page: Page, site: Site, config: OutputTemplate) throws -> String {
+        // Run beforePageRender hooks
+        var processedPage = page
+        if let pluginManager = pluginManager {
+            processedPage = try pluginManager.beforePageRender(page)
+        }
+
         // Determine which view template to use
-        let layout = page.frontMatter.layout
+        let layout = processedPage.frontMatter.layout
         let viewPath = config.viewPath(for: layout)
 
         // Load view template
@@ -49,10 +57,38 @@ class HTMLRenderer {
         variables["charset"] = variables["charset"] ?? "utf-8"
         variables["language"] = variables["language"] ?? "en"
 
-        let context = TemplateContext.create(site: site, page: page, variables: variables)
+        // Add theme CSS if theme is configured
+        if let theme = site.configuration.theme {
+            variables["themeCSS"] = theme.generateCSSVariables()
+        }
 
-        // Perform variable substitution
-        return templateEngine.render(template: viewTemplate, context: context)
+        // Create initial context for processing page content
+        let initialContext = TemplateContext.create(site: site, page: processedPage, variables: variables)
+
+        // Process template variables in the page content
+        let processedContent = templateEngine.render(template: processedPage.content, context: initialContext)
+
+        // Create a new page with the processed content
+        let pageWithProcessedContent = Page(
+            path: processedPage.path,
+            frontMatter: processedPage.frontMatter,
+            content: processedContent,
+            rawMarkdown: processedPage.rawMarkdown,
+            modifiedDate: processedPage.modifiedDate
+        )
+
+        // Create final context with the processed page
+        let context = TemplateContext.create(site: site, page: pageWithProcessedContent, variables: variables)
+
+        // Perform variable substitution on the view template
+        var html = templateEngine.render(template: viewTemplate, context: context)
+
+        // Run afterPageRender hooks
+        if let pluginManager = pluginManager {
+            html = try pluginManager.afterPageRender(page: processedPage, html: html)
+        }
+
+        return html
     }
 
     /// Calculate the output file path for a page

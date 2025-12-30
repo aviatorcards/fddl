@@ -1,0 +1,66 @@
+name: "Web 2.0"
+version: "1.0"
+author: "fddl"
+description: "Web 2.0 style with glossy buttons, reflections, and rounded corners"
+defaultLayout: "page"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "web2"
+  colors:
+    primary: "#4a90e2"
+    secondary: "#7f8c8d"
+    accent: "#27ae60"
+    background: "#f0f3f5"
+    text: "#2c3e50"
+    link: "#4a90e2"
+    link_hover: "#357abd"
+    border: "#d5d8dc"
+    code_background: "#ffffff"
+  typography:
+    font_family: "'Lucida Grande', 'Verdana', sans-serif"
+    heading_font: "'Helvetica Neue', 'Arial', sans-serif"
+    code_font: "'Menlo', 'Monaco', monospace"
+    base_font_size: "14px"
+    line_height: "1.6"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "24px"
+    xl: "48px"
+  custom_css:
+    border-radius: "8px"
+    box-shadow: "0 2px 4px rgba(0, 0, 0, 0.1)"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Web 2.0 Site"
+      site_url: "https://example.com"
+      description: "A modern web application"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

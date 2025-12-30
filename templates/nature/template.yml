@@ -1,0 +1,66 @@
+name: "Nature"
+version: "1.0"
+author: "fddl"
+description: "Nature-inspired with earth tones and organic design elements"
+defaultLayout: "page"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "nature"
+  colors:
+    primary: "#2d5016"
+    secondary: "#8b7355"
+    accent: "#6b8e23"
+    background: "#f5f5dc"
+    text: "#2d3319"
+    link: "#556b2f"
+    link_hover: "#6b8e23"
+    border: "#9caf88"
+    code_background: "#eef2e6"
+  typography:
+    font_family: "'Lora', 'Georgia', serif"
+    heading_font: "'Montserrat', 'Helvetica', sans-serif"
+    code_font: "'Source Code Pro', monospace"
+    base_font_size: "18px"
+    line_height: "1.7"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "20px"
+    lg: "40px"
+    xl: "60px"
+  custom_css:
+    max-width: "800px"
+    border-radius: "8px"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Nature Blog"
+      site_url: "https://example.com"
+      description: "Connecting with the natural world"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

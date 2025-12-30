@@ -1,12 +1,12 @@
 import Foundation
 
 /// Represents YAML frontmatter metadata from markdown files
-struct FrontMatter: Codable {
-    let title: String?
-    let description: String?
-    let date: Date?
-    let tags: [String]?
-    let layout: String?
+public struct FrontMatter: Codable {
+    public let title: String?
+    public let description: String?
+    public let date: Date?
+    public let tags: [String]?
+    public let layout: String?
 
     /// Custom key-value pairs for extensibility
     private var additionalProperties: [String: String]?

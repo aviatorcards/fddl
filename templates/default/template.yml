@@ -15,7 +15,62 @@ navigation:
     url: "/recipes/"
   - label: "Docs"
     url: "/docs/"
+  - label: "Features Demo"
+    url: "/features-demo.html"
   - label: "About"
     url: "/about.html"
   - label: "Contact"
     url: "/contact.html"
+
+# Theme configuration (GeoCities for maximum nostalgia!)
+theme:
+  name: "geocities"
+  colors:
+    primary: "#ff00ff"
+    secondary: "#00ffff"
+    accent: "#ffff00"
+    background: "#000080"
+    text: "#ffffff"
+    link: "#00ff00"
+    link_hover: "#ffff00"
+    border: "#ff00ff"
+    code_background: "#000000"
+  typography:
+    font_family: "'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive"
+    heading_font: "'Impact', 'Arial Black', sans-serif"
+    code_font: "'Courier New', monospace"
+    base_font_size: "14px"
+    line_height: "1.4"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "24px"
+    xl: "32px"
+  custom_css:
+    border-style: "ridge"
+    border-width: "3px"
+    text-shadow: "2px 2px #000000"
+
+# Plugins configuration
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "My Awesome fddl Site"
+      site_url: "https://example.com"
+      description: "A retro-modern website built with fddl"
+      limit: "20"
+
+  - identifier: "search"
+    enabled: true
+
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

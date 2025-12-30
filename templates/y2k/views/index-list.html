@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="{{language}}">
+<head>
+    <meta charset="{{charset}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page.title}} - {{site.name}}</title>
+    <link rel="stylesheet" href="/assets/css/theme.css">
+    {{#if themeCSS}}
+    <style>
+        {{themeCSS}}
+    </style>
+    {{/if}}
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <h1 class="site-title"><a href="/">{{site.name}}</a></h1>
+            <nav class="site-nav">
+                {{#each site.navigation}}
+                <a href="{{this.url}}">{{this.label}}</a>
+                {{/each}}
+            </nav>
+        </div>
+    </header>
+
+    <main class="site-main">
+        <div class="container">
+            <h1 class="index-title">{{page.title}}</h1>
+            <div class="index-list">
+                {{#each site.postsInDirectory}}
+                <article class="index-item">
+                    <h2><a href="{{this.url}}">{{this.title}}</a></h2>
+                    {{#if this.description}}
+                    <p class="index-description">{{this.description}}</p>
+                    {{/if}}
+                    {{#if this.date}}
+                    <time class="index-date">{{this.date}}</time>
+                    {{/if}}
+                    {{#if this.tags}}
+                    <div class="index-tags">
+                        {{#each this.tags}}
+                        <a href="/tags/{{this}}.html" class="tag">{{this}}</a>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </article>
+                {{/each}}
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; 2025 {{site.name}}. Built with fddl.</p>
+        </div>
+    </footer>
+
+    <script src="/assets/javascript/theme.js"></script>
+</body>
+</html>

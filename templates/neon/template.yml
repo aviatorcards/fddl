@@ -1,0 +1,67 @@
+name: "Neon"
+version: "1.0"
+author: "fddl"
+description: "Cyberpunk neon aesthetic with glowing accents on dark background"
+defaultLayout: "page"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "neon"
+  colors:
+    primary: "#00ff00"
+    secondary: "#ff00ff"
+    accent: "#00ffff"
+    background: "#0a0a0a"
+    text: "#00ff00"
+    link: "#ff00ff"
+    link_hover: "#00ffff"
+    border: "#00ff00"
+    code_background: "#000000"
+  typography:
+    font_family: "'Courier New', 'Consolas', monospace"
+    heading_font: "'Orbitron', 'Courier New', monospace"
+    code_font: "'Courier New', monospace"
+    base_font_size: "16px"
+    line_height: "1.6"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "32px"
+    xl: "64px"
+  custom_css:
+    text-shadow: "0 0 10px currentColor"
+    box-shadow: "0 0 20px var(--primary-color)"
+    border-width: "2px"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Neon Site"
+      site_url: "https://example.com"
+      description: "A cyberpunk website"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

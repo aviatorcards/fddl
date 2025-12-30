@@ -1,0 +1,66 @@
+name: "Blog"
+version: "1.0"
+author: "fddl"
+description: "Blog-focused layout with reading-optimized typography and sidebar emphasis"
+defaultLayout: "post"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "blog"
+  colors:
+    primary: "#2c3e50"
+    secondary: "#7f8c8d"
+    accent: "#3498db"
+    background: "#ffffff"
+    text: "#2c3e50"
+    link: "#3498db"
+    link_hover: "#2980b9"
+    border: "#ecf0f1"
+    code_background: "#f8f9fa"
+  typography:
+    font_family: "'Georgia', 'Times New Roman', serif"
+    heading_font: "'Helvetica Neue', 'Arial', sans-serif"
+    code_font: "'Consolas', 'Monaco', monospace"
+    base_font_size: "19px"
+    line_height: "1.8"
+  spacing:
+    xs: "4px"
+    sm: "8px"
+    md: "16px"
+    lg: "32px"
+    xl: "64px"
+  custom_css:
+    max-width: "780px"
+    sidebar-width: "300px"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "My Blog"
+      site_url: "https://example.com"
+      description: "A blog about interesting things"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"

@@ -1,0 +1,67 @@
+name: "Brutalist"
+version: "1.0"
+author: "fddl"
+description: "Bold brutalist web design with raw aesthetics and stark contrasts"
+defaultLayout: "page"
+outputs:
+  - html
+
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+
+theme:
+  name: "brutalist"
+  colors:
+    primary: "#000000"
+    secondary: "#ff0000"
+    accent: "#ffff00"
+    background: "#ffffff"
+    text: "#000000"
+    link: "#ff0000"
+    link_hover: "#000000"
+    border: "#000000"
+    code_background: "#ffffff"
+  typography:
+    font_family: "monospace"
+    heading_font: "monospace"
+    code_font: "monospace"
+    base_font_size: "16px"
+    line_height: "1.4"
+  spacing:
+    xs: "0px"
+    sm: "4px"
+    md: "12px"
+    lg: "24px"
+    xl: "48px"
+  custom_css:
+    border-style: "solid"
+    border-width: "4px"
+    letter-spacing: "-0.5px"
+
+plugins:
+  - identifier: "sitemap"
+    enabled: true
+    options:
+      base_url: "https://example.com"
+  - identifier: "rss"
+    enabled: true
+    options:
+      site_title: "Brutalist Site"
+      site_url: "https://example.com"
+      description: "A brutalist website"
+      limit: "20"
+  - identifier: "search"
+    enabled: true
+  - identifier: "reading-time"
+    enabled: true
+    options:
+      words_per_minute: "200"
