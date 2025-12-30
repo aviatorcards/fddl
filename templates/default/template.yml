@@ -1,0 +1,21 @@
+name: "fddl"
+version: "1.0"
+description: "Default fddl template"
+defaultLayout: "page"
+outputs:
+  - html
+navigation:
+  - label: "Home"
+    url: "/"
+  - label: "Blog"
+    url: "/blog/"
+  - label: "Projects"
+    url: "/projects/"
+  - label: "Recipes"
+    url: "/recipes/"
+  - label: "Docs"
+    url: "/docs/"
+  - label: "About"
+    url: "/about.html"
+  - label: "Contact"
+    url: "/contact.html"

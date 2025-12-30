@@ -1,0 +1,12 @@
+format: html
+extension: .html
+outputPath: "output"
+view: "views/page.html"
+indexView: "views/index-list.html"
+
+layouts:
+  page: "views/page.html"
+  post: "views/post.html"
+  project: "views/project.html"
+  recipe: "views/recipe.html"
+  doc: "views/doc.html"

@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:fddl}",
+            "name": "Debug fddl",
+            "program": "${workspaceFolder:fddl}/.build/debug/fddl",
+            "preLaunchTask": "swift: Build Debug fddl"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:fddl}",
+            "name": "Release fddl",
+            "program": "${workspaceFolder:fddl}/.build/release/fddl",
+            "preLaunchTask": "swift: Build Release fddl"
+        }
+    ]
+}
