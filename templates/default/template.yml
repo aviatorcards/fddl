@@ -11,8 +11,6 @@ navigation:
     url: "/blog/"
   - label: "Projects"
     url: "/projects/"
-  - label: "Recipes"
-    url: "/recipes/"
   - label: "Docs"
     url: "/docs/"
   - label: "Features Demo"

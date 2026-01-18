@@ -39,18 +39,21 @@ public class ShortcodeProcessor {
         let emptyPattern = #"\{\{<\s*(\w+)(.*?)>\}\}"#
 
         // Process paired tags first
-        if let regex = try? NSRegularExpression(pattern: pairedPattern, options: [.dotMatchesLineSeparators]) {
+        if let regex = try? NSRegularExpression(
+            pattern: pairedPattern, options: [.dotMatchesLineSeparators])
+        {
             // Keep processing until no more matches (for nested or overlapping replacements)
             var didReplace = true
             var iterations = 0
-            let maxIterations = 100 // Safety limit
+            let maxIterations = 100  // Safety limit
 
             while didReplace && iterations < maxIterations {
                 iterations += 1
                 didReplace = false
 
                 let nsString = result as NSString
-                let matches = regex.matches(in: result, range: NSRange(location: 0, length: nsString.length))
+                let matches = regex.matches(
+                    in: result, range: NSRange(location: 0, length: nsString.length))
 
                 for match in matches.reversed() {
                     guard match.numberOfRanges >= 4 else { continue }
@@ -63,7 +66,9 @@ public class ShortcodeProcessor {
 
                     if let shortcode = shortcodes[shortcodeName] {
                         let rendered = shortcode.render(params: params, content: content)
-                        result = (result as NSString).replacingCharacters(in: match.range, with: rendered) as String
+                        result =
+                            (result as NSString).replacingCharacters(
+                                in: match.range, with: rendered) as String
                         didReplace = true
                     }
                 }
@@ -81,7 +86,8 @@ public class ShortcodeProcessor {
                 didReplace = false
 
                 let nsString = result as NSString
-                let matches = regex.matches(in: result, range: NSRange(location: 0, length: nsString.length))
+                let matches = regex.matches(
+                    in: result, range: NSRange(location: 0, length: nsString.length))
 
                 for match in matches.reversed() {
                     guard match.numberOfRanges >= 3 else { continue }
@@ -93,7 +99,9 @@ public class ShortcodeProcessor {
 
                     if let shortcode = shortcodes[shortcodeName] {
                         let rendered = shortcode.render(params: params, content: nil)
-                        result = (result as NSString).replacingCharacters(in: match.range, with: rendered) as String
+                        result =
+                            (result as NSString).replacingCharacters(
+                                in: match.range, with: rendered) as String
                         didReplace = true
                     }
                 }
@@ -111,7 +119,8 @@ public class ShortcodeProcessor {
                 didReplace = false
 
                 let nsString = result as NSString
-                let matches = regex.matches(in: result, range: NSRange(location: 0, length: nsString.length))
+                let matches = regex.matches(
+                    in: result, range: NSRange(location: 0, length: nsString.length))
 
                 for match in matches.reversed() {
                     guard match.numberOfRanges >= 3 else { continue }
@@ -123,7 +132,9 @@ public class ShortcodeProcessor {
 
                     if let shortcode = shortcodes[shortcodeName] {
                         let rendered = shortcode.render(params: params, content: nil)
-                        result = (result as NSString).replacingCharacters(in: match.range, with: rendered) as String
+                        result =
+                            (result as NSString).replacingCharacters(
+                                in: match.range, with: rendered) as String
                         didReplace = true
                     }
                 }
@@ -137,7 +148,10 @@ public class ShortcodeProcessor {
     private func decodeShortcodeTags(_ html: String) -> String {
         // Replace HTML entities only within shortcode delimiters {{< >}}
         let pattern = #"\{\{&lt;(.*?)&gt;\}\}"#
-        guard let regex = try? NSRegularExpression(pattern: pattern, options: [.dotMatchesLineSeparators]) else {
+        guard
+            let regex = try? NSRegularExpression(
+                pattern: pattern, options: [.dotMatchesLineSeparators])
+        else {
             return html
         }
 
@@ -147,7 +161,8 @@ public class ShortcodeProcessor {
         // Process in reverse to maintain offsets
         for match in matches.reversed() {
             let fullMatch = (html as NSString).substring(with: match.range)
-            let decoded = fullMatch
+            let decoded =
+                fullMatch
                 .replacingOccurrences(of: "&lt;", with: "<")
                 .replacingOccurrences(of: "&gt;", with: ">")
                 .replacingOccurrences(of: "&quot;", with: "\"")
@@ -166,11 +181,12 @@ public class ShortcodeProcessor {
         var params: [String: String] = [:]
 
         // Convert curly quotes to straight quotes first
-        let normalized = string
+        let normalized =
+            string
             .replacingOccurrences(of: "\u{201C}", with: "\"")  // " → "
             .replacingOccurrences(of: "\u{201D}", with: "\"")  // " → "
-            .replacingOccurrences(of: "\u{2018}", with: "'")   // ' → '
-            .replacingOccurrences(of: "\u{2019}", with: "'")   // ' → '
+            .replacingOccurrences(of: "\u{2018}", with: "'")  // ' → '
+            .replacingOccurrences(of: "\u{2019}", with: "'")  // ' → '
 
         // Match key="value" or key='value' with straight quotes
         let pattern = #"(\w+)=["']([^"']*)["']"#
@@ -179,7 +195,8 @@ public class ShortcodeProcessor {
         }
 
         let nsString = normalized as NSString
-        let matches = regex.matches(in: normalized, range: NSRange(location: 0, length: nsString.length))
+        let matches = regex.matches(
+            in: normalized, range: NSRange(location: 0, length: nsString.length))
 
         for match in matches {
             if match.numberOfRanges >= 3 {
@@ -191,6 +208,19 @@ public class ShortcodeProcessor {
 
         return params
     }
+}
+
+// MARK: - HTML Escaping Utility
+
+/// Escapes HTML special characters to prevent XSS attacks
+private func htmlEscape(_ string: String) -> String {
+    return
+        string
+        .replacingOccurrences(of: "&", with: "&amp;")
+        .replacingOccurrences(of: "<", with: "&lt;")
+        .replacingOccurrences(of: ">", with: "&gt;")
+        .replacingOccurrences(of: "\"", with: "&quot;")
+        .replacingOccurrences(of: "'", with: "&#39;")
 }
 
 /// Protocol for shortcode implementations
@@ -206,8 +236,9 @@ struct BlinkShortcode: Shortcode {
     let name = "blink"
 
     func render(params: [String: String], content: String?) -> String {
-        let text = content ?? params["text"] ?? ""
-        return "<span class=\"blink-text\" style=\"animation: blink 1s linear infinite;\">\(text)</span><style>@keyframes blink { 50% { opacity: 0; } }</style>"
+        let text = htmlEscape(content ?? params["text"] ?? "")
+        return
+            "<span class=\"blink-text\" style=\"animation: blink 1s linear infinite;\">\(text)</span><style>@keyframes blink { 50% { opacity: 0; } }</style>"
     }
 }
 
@@ -216,13 +247,17 @@ struct MarqueeShortcode: Shortcode {
     let name = "marquee"
 
     func render(params: [String: String], content: String?) -> String {
-        let text = content ?? ""
-        let direction = params["direction"] ?? "left"
-        let speed = params["speed"] ?? "normal"
+        let text = htmlEscape(content ?? "")
+        let direction =
+            ["left", "right", "up", "down"].contains(params["direction"])
+            ? params["direction"]! : "left"
+        let speed =
+            ["fast", "slow", "normal"].contains(params["speed"]) ? params["speed"]! : "normal"
 
         let scrollAmount = speed == "fast" ? "20" : speed == "slow" ? "5" : "10"
 
-        return "<marquee direction=\"\(direction)\" scrollamount=\"\(scrollAmount)\">\(text)</marquee>"
+        return
+            "<marquee direction=\"\(direction)\" scrollamount=\"\(scrollAmount)\">\(text)</marquee>"
     }
 }
 
@@ -235,10 +270,16 @@ struct YouTubeShortcode: Shortcode {
             return "<!-- YouTube shortcode: missing id parameter -->"
         }
 
-        let width = params["width"] ?? "560"
-        let height = params["height"] ?? "315"
+        // Sanitize videoId - YouTube IDs are alphanumeric with dashes and underscores
+        let sanitizedVideoId = htmlEscape(videoId).filter {
+            $0.isLetter || $0.isNumber || $0 == "-" || $0 == "_"
+        }
 
-        return "<div class=\"video-container\" style=\"position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;\"><iframe style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%;\" width=\"\(width)\" height=\"\(height)\" src=\"https://www.youtube.com/embed/\(videoId)\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div>"
+        let width = htmlEscape(params["width"] ?? "560")
+        let height = htmlEscape(params["height"] ?? "315")
+
+        return
+            "<div class=\"video-container\" style=\"position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;\"><iframe style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%;\" width=\"\(width)\" height=\"\(height)\" src=\"https://www.youtube.com/embed/\(sanitizedVideoId)\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe></div>"
     }
 }
 
@@ -251,21 +292,24 @@ struct ImageShortcode: Shortcode {
             return "<!-- Image shortcode: missing src parameter -->"
         }
 
-        let alt = params["alt"] ?? ""
+        let escapedSrc = htmlEscape(src)
+        let escapedAlt = htmlEscape(params["alt"] ?? "")
         let caption = params["caption"] ?? content
         let width = params["width"]
-        let align = params["align"] ?? "center"
+        let align =
+            ["left", "center", "right"].contains(params["align"]) ? params["align"]! : "center"
 
         var html = "<figure style=\"text-align: \(align);\">"
 
         if let width = width {
-            html += "<img src=\"\(src)\" alt=\"\(alt)\" width=\"\(width)\" />"
+            let escapedWidth = htmlEscape(width)
+            html += "<img src=\"\(escapedSrc)\" alt=\"\(escapedAlt)\" width=\"\(escapedWidth)\" />"
         } else {
-            html += "<img src=\"\(src)\" alt=\"\(alt)\" />"
+            html += "<img src=\"\(escapedSrc)\" alt=\"\(escapedAlt)\" />"
         }
 
         if let caption = caption, !caption.isEmpty {
-            html += "<figcaption>\(caption)</figcaption>"
+            html += "<figcaption>\(htmlEscape(caption))</figcaption>"
         }
 
         html += "</figure>"
@@ -278,16 +322,20 @@ struct AlertShortcode: Shortcode {
     let name = "alert"
 
     func render(params: [String: String], content: String?) -> String {
-        let type = params["type"] ?? "info"
+        // Validate and sanitize type parameter
+        let validTypes = ["info", "warning", "error", "danger", "success"]
+        let type = validTypes.contains(params["type"] ?? "") ? params["type"]! : "info"
         let title = params["title"]
-        let message = content ?? ""
+        let message = htmlEscape(content ?? "")
 
         let (bgColor, textColor, icon) = styleFor(type: type)
 
-        var html = "<div class=\"alert alert-\(type)\" style=\"padding: 1rem; margin: 1rem 0; background: \(bgColor); color: \(textColor); border-left: 4px solid \(textColor); border-radius: 4px;\">"
+        var html =
+            "<div class=\"alert alert-\(type)\" style=\"padding: 1rem; margin: 1rem 0; background: \(bgColor); color: \(textColor); border-left: 4px solid \(textColor); border-radius: 4px;\">"
 
         if let title = title, !title.isEmpty {
-            html += "<strong style=\"display: block; margin-bottom: 0.5rem;\">\(icon) \(title)</strong>"
+            html +=
+                "<strong style=\"display: block; margin-bottom: 0.5rem;\">\(icon) \(htmlEscape(title))</strong>"
         }
 
         html += message
@@ -304,7 +352,7 @@ struct AlertShortcode: Shortcode {
             return ("#f8d7da", "#721c24", "❌")
         case "success":
             return ("#d4edda", "#155724", "✅")
-        default: // info
+        default:  // info
             return ("#d1ecf1", "#0c5460", "ℹ️")
         }
     }
@@ -316,12 +364,14 @@ struct CounterShortcode: Shortcode {
 
     func render(params: [String: String], content: String?) -> String {
         let style = params["style"] ?? "digital"
-        let number = Int.random(in: 1000...99999) // Random counter for now
+        let number = Int.random(in: 1000...99999)  // Random counter for now
 
         if style == "digital" {
-            return "<div class=\"visitor-counter\" style=\"font-family: 'Courier New', monospace; background: #000; color: #0f0; padding: 0.5rem; display: inline-block; border: 2px solid #0f0;\">VISITORS: \(String(format: "%05d", number))</div>"
+            return
+                "<div class=\"visitor-counter\" style=\"font-family: 'Courier New', monospace; background: #000; color: #0f0; padding: 0.5rem; display: inline-block; border: 2px solid #0f0;\">VISITORS: \(String(format: "%05d", number))</div>"
         } else {
-            return "<span class=\"visitor-counter\" style=\"font-weight: bold;\">👁️ \(number) visitors</span>"
+            return
+                "<span class=\"visitor-counter\" style=\"font-weight: bold;\">👁️ \(number) visitors</span>"
         }
     }
 }

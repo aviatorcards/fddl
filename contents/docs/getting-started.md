@@ -1,7 +1,10 @@
 ---
 title: "Getting Started with fddl"
 description: "From zero to deployed in under five minutes."
-tags: ["doc", "tutorial", "introduction"]
+tags:
+  - doc
+  - tutorial
+  - introduction
 layout: doc
 ---
 

@@ -17,18 +17,21 @@ class HTMLRenderer {
 
         // Create output directory
         let htmlOutputDir = outputDirectory.appendingPathComponent(htmlConfig.outputPath)
-        try FileManager.default.createDirectory(at: htmlOutputDir, withIntermediateDirectories: true)
+        try FileManager.default.createDirectory(
+            at: htmlOutputDir, withIntermediateDirectories: true)
 
         print("Rendering \(site.pages.count) pages to HTML...")
 
         // Render each page
         for page in site.pages {
             let htmlContent = try renderPage(page, site: site, config: htmlConfig)
-            let outputPath = calculateOutputPath(for: page, config: htmlConfig, baseDir: htmlOutputDir)
+            let outputPath = calculateOutputPath(
+                for: page, config: htmlConfig, baseDir: htmlOutputDir)
 
             // Create subdirectories if needed
             let outputDir = outputPath.deletingLastPathComponent()
-            try FileManager.default.createDirectory(at: outputDir, withIntermediateDirectories: true)
+            try FileManager.default.createDirectory(
+                at: outputDir, withIntermediateDirectories: true)
 
             // Write HTML file
             try htmlContent.write(to: outputPath, atomically: true, encoding: .utf8)
@@ -58,15 +61,20 @@ class HTMLRenderer {
         variables["language"] = variables["language"] ?? "en"
 
         // Add theme CSS if theme is configured
+        // Theme functionality not yet implemented
+        /*
         if let theme = site.configuration.theme {
             variables["themeCSS"] = theme.generateCSSVariables()
         }
+        */
 
         // Create initial context for processing page content
-        let initialContext = TemplateContext.create(site: site, page: processedPage, variables: variables)
+        let initialContext = TemplateContext.create(
+            site: site, page: processedPage, variables: variables)
 
         // Process template variables in the page content
-        let processedContent = templateEngine.render(template: processedPage.content, context: initialContext)
+        let processedContent = templateEngine.render(
+            template: processedPage.content, context: initialContext)
 
         // Create a new page with the processed content
         let pageWithProcessedContent = Page(
@@ -78,7 +86,8 @@ class HTMLRenderer {
         )
 
         // Create final context with the processed page
-        let context = TemplateContext.create(site: site, page: pageWithProcessedContent, variables: variables)
+        let context = TemplateContext.create(
+            site: site, page: pageWithProcessedContent, variables: variables)
 
         // Perform variable substitution on the view template
         var html = templateEngine.render(template: viewTemplate, context: context)

@@ -1,11 +1,15 @@
 ---
 title: "Contact"
 description: "Get in touch"
+layout: page
+tags:
+  - contact
+  - social
 ---
 
 # Get in Touch
 
-Have questions, suggestions, or just want to say hello? I'd love to hear from you!
+Have questions or comments? Have an idea for a feature? Submit a pull request!
 
 ## Ways to Connect
 
@@ -24,7 +28,8 @@ Find me on GitHub for code-related questions and contributions:
 ### Social Media
 
 - **Twitter**: @aviatorcards
-- **LinkedIn**: linkedin.com/in/username
+- **LinkedIn**: linkedin.com/in/tristan-6a160b3a2 **Note:** LinkedIn is a cesspool.
+- **Bluesky**: @fddl.dev
 
 ## Found a Bug?
 
@@ -38,4 +43,4 @@ Neat! I like bugs!
 
 ---
 
-Thanks for your interest in fddl!∂
+Thanks for your interest in fddl!

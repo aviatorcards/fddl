@@ -1,7 +1,10 @@
 ---
 title: "Shortcodes Reference"
 description: "Enhance your markdown with dynamic shortcodes."
-tags: ["doc", "shortcodes", "advanced"]
+tags:
+  - doc
+  - shortcodes
+  - advanced
 layout: doc
 ---
 

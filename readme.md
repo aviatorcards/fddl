@@ -142,6 +142,7 @@ You can create different navigation menus for different layouts (page vs. post) 
   <a href="/blog/">All Posts</a>
   <a href="/recipes/">Recipes</a>
   <a href="/travel/">Travel</a>
+  <a href="/photos/">Photos</a>
   <a href="/about.html">About</a>
 </nav>
 ```
@@ -175,4 +176,4 @@ contents/
 
 ## License
 
-MIT License
+GPL License

@@ -1,5 +1,5 @@
-import Foundation
 import ArgumentParser
+import Foundation
 
 struct Serve: ParsableCommand {
     static let configuration = CommandConfiguration(
@@ -27,13 +27,22 @@ struct Serve: ParsableCommand {
         print("🔨 fddl development server")
         print("")
 
+        // Warn if binding to non-local address
+        if host != "127.0.0.1" && host != "localhost" {
+            print("⚠️  WARNING: Binding to \(host) exposes dev server to network")
+            print("   This is intended for development only, not production!")
+            print("")
+        }
+
         // Initial build
         try buildSite(workingDirectory: workingDirectory, templateName: templateName)
         print("")
 
         // Set up file watchers
-        let contentsWatcher = FileWatcher(directory: workingDirectory.appendingPathComponent("contents"))
-        let templatesWatcher = FileWatcher(directory: workingDirectory.appendingPathComponent("templates"))
+        let contentsWatcher = FileWatcher(
+            directory: workingDirectory.appendingPathComponent("contents"))
+        let templatesWatcher = FileWatcher(
+            directory: workingDirectory.appendingPathComponent("templates"))
 
         var isRebuilding = false
 
@@ -86,10 +95,10 @@ struct Serve: ParsableCommand {
 
     private func openBrowser(url: String) {
         #if os(macOS)
-        let task = Process()
-        task.executableURL = URL(fileURLWithPath: "/usr/bin/open")
-        task.arguments = [url]
-        try? task.run()
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: "/usr/bin/open")
+            task.arguments = [url]
+            try? task.run()
         #endif
     }
 

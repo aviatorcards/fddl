@@ -1,6 +1,6 @@
 ---
-title: "fddl Features Demo"
-description: "Showcasing all the awesome features of fddl"
+title: "fddl Features"
+description: "A few things fddl can do."
 layout: page
 tags:
   - demo
@@ -8,9 +8,9 @@ tags:
   - geocities
 ---
 
-# Welcome to the fddl Features Demo! 🎉
+# fddl Features
 
-This page demonstrates all the cool new features we've added to fddl.
+This page demonstrates new features added to fddl.
 
 ## Syntax Highlighting
 

@@ -5,8 +5,8 @@ import Foundation
 /// Generates sitemap.xml for SEO
 public class SitemapPlugin: Plugin {
     public let identifier = "sitemap"
-    public let name = "Sitemap Generator"
-    public let version = "1.0.0"
+    public let name = "fddl Sitemap Generator"
+    public let version = "0.5.0"
     public let description = "Generates sitemap.xml for search engines"
 
     private let config: PluginConfig
@@ -26,22 +26,22 @@ public class SitemapPlugin: Plugin {
         let outputPath = context.outputDirectory.appendingPathComponent("sitemap.xml")
 
         var xml = """
-        <?xml version="1.0" encoding="UTF-8"?>
-        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-        """
+            """
 
         for page in pages {
             let url = "\(baseURL)/\(page.urlPath)"
             let lastMod = ISO8601DateFormatter().string(from: page.modifiedDate)
 
             xml += """
-            <url>
-                <loc>\(url)</loc>
-                <lastmod>\(lastMod)</lastmod>
-            </url>
+                <url>
+                    <loc>\(url)</loc>
+                    <lastmod>\(lastMod)</lastmod>
+                </url>
 
-            """
+                """
         }
 
         xml += "</urlset>"
@@ -56,8 +56,8 @@ public class SitemapPlugin: Plugin {
 /// Generates RSS feed for blog posts
 public class RSSPlugin: Plugin {
     public let identifier = "rss"
-    public let name = "RSS Feed Generator"
-    public let version = "1.0.0"
+    public let name = "fddl RSS Feed Generator"
+    public let version = "0.5.0"
     public let description = "Generates RSS 2.0 feed for your content"
 
     private let config: PluginConfig
@@ -89,15 +89,15 @@ public class RSSPlugin: Plugin {
         }.prefix(limit)
 
         var xml = """
-        <?xml version="1.0" encoding="UTF-8"?>
-        <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-        <channel>
-            <title>\(siteTitle.xmlEscaped)</title>
-            <link>\(siteURL)</link>
-            <description>\(description.xmlEscaped)</description>
-            <atom:link href="\(siteURL)/feed.xml" rel="self" type="application/rss+xml"/>
+            <?xml version="1.0" encoding="UTF-8"?>
+            <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+            <channel>
+                <title>\(siteTitle.xmlEscaped)</title>
+                <link>\(siteURL)</link>
+                <description>\(description.xmlEscaped)</description>
+                <atom:link href="\(siteURL)/feed.xml" rel="self" type="application/rss+xml"/>
 
-        """
+            """
 
         for post in sortedPosts {
             let title = post.displayTitle.xmlEscaped
@@ -113,21 +113,21 @@ public class RSSPlugin: Plugin {
             }
 
             xml += """
-            <item>
-                <title>\(title)</title>
-                <link>\(url)</link>
-                <description>\(description)</description>
-                <pubDate>\(pubDate)</pubDate>
-                <guid>\(url)</guid>
-            </item>
+                <item>
+                    <title>\(title)</title>
+                    <link>\(url)</link>
+                    <description>\(description)</description>
+                    <pubDate>\(pubDate)</pubDate>
+                    <guid>\(url)</guid>
+                </item>
 
-            """
+                """
         }
 
         xml += """
-        </channel>
-        </rss>
-        """
+            </channel>
+            </rss>
+            """
 
         try xml.write(to: outputPath, atomically: true, encoding: .utf8)
         print("  ✓ Generated RSS feed with \(sortedPosts.count) items")
@@ -139,8 +139,8 @@ public class RSSPlugin: Plugin {
 /// Generates search index for client-side search
 public class SearchIndexPlugin: Plugin {
     public let identifier = "search"
-    public let name = "Search Index Generator"
-    public let version = "1.0.0"
+    public let name = "fddl Search Index Generator"
+    public let version = "0.5.0"
     public let description = "Generates JSON search index"
 
     private let config: PluginConfig
@@ -163,12 +163,13 @@ public class SearchIndexPlugin: Plugin {
                 "title": page.displayTitle,
                 "url": page.urlPath,
                 "description": page.frontMatter.description ?? "",
-                "content": page.rawMarkdown.prefix(500).description, // First 500 chars
-                "tags": (page.frontMatter.tags ?? []).joined(separator: ", ")
+                "content": page.rawMarkdown.prefix(500).description,  // First 500 chars
+                "tags": (page.frontMatter.tags ?? []).joined(separator: ", "),
             ]
         }
 
-        let jsonData = try JSONSerialization.data(withJSONObject: searchEntries, options: .prettyPrinted)
+        let jsonData = try JSONSerialization.data(
+            withJSONObject: searchEntries, options: .prettyPrinted)
         try jsonData.write(to: outputPath)
         print("  ✓ Generated search index with \(pages.count) entries")
     }
@@ -179,8 +180,8 @@ public class SearchIndexPlugin: Plugin {
 /// Injects analytics code into HTML pages
 public class AnalyticsPlugin: Plugin {
     public let identifier = "analytics"
-    public let name = "Analytics Injector"
-    public let version = "1.0.0"
+    public let name = "fddl Analytics Injector"
+    public let version = "0.5.0"
     public let description = "Injects analytics tracking code"
 
     private let config: PluginConfig
@@ -200,20 +201,20 @@ public class AnalyticsPlugin: Plugin {
         switch provider {
         case "google":
             trackingCode = """
-            <!-- Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=\(trackingId)"></script>
-            <script>
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '\(trackingId)');
-            </script>
-            """
+                <!-- Google Analytics -->
+                <script async src="https://www.googletagmanager.com/gtag/js?id=\(trackingId)"></script>
+                <script>
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '\(trackingId)');
+                </script>
+                """
         case "plausible":
             let domain = config.options?["domain"] ?? ""
             trackingCode = """
-            <script defer data-domain="\(domain)" src="https://plausible.io/js/script.js"></script>
-            """
+                <script defer data-domain="\(domain)" src="https://plausible.io/js/script.js"></script>
+                """
         default:
             return html
         }
@@ -234,8 +235,8 @@ public class AnalyticsPlugin: Plugin {
 /// Adds reading time estimates to pages
 public class ReadingTimePlugin: Plugin {
     public let identifier = "reading-time"
-    public let name = "Reading Time Calculator"
-    public let version = "1.0.0"
+    public let name = "fddl Reading Time Calculator"
+    public let version = "0.5.0"
     public let description = "Calculates and adds reading time to pages"
 
     private let config: PluginConfig
@@ -276,8 +277,8 @@ public class ReadingTimePlugin: Plugin {
 
 // MARK: - Helper Extensions
 
-private extension String {
-    var xmlEscaped: String {
+extension String {
+    fileprivate var xmlEscaped: String {
         self.replacingOccurrences(of: "&", with: "&amp;")
             .replacingOccurrences(of: "<", with: "&lt;")
             .replacingOccurrences(of: ">", with: "&gt;")

@@ -15,7 +15,7 @@ struct TemplateConfiguration: Codable {
     let defaultLayout: String?
     let outputs: [String]
     let navigation: [NavigationItem]
-    let theme: Theme?
+    // let theme: Theme?  // Theme functionality not yet implemented
     let plugins: [PluginConfig]?
 
     enum CodingKeys: String, CodingKey {
@@ -26,7 +26,7 @@ struct TemplateConfiguration: Codable {
         case defaultLayout
         case outputs
         case navigation
-        case theme
+        // case theme  // Theme functionality not yet implemented
         case plugins
     }
 
@@ -39,15 +39,16 @@ struct TemplateConfiguration: Codable {
             defaultLayout: "page",
             outputs: ["html"],
             navigation: [],
-            theme: nil,
+            // theme: nil,  // Theme functionality not yet implemented
             plugins: nil
         )
     }
 
-    /// Get the active theme (from config or use modern as default)
-    var activeTheme: Theme {
-        theme ?? .modern
-    }
+    // TODO: Implement theme functionality
+    // /// Get the active theme (from config or use modern as default)
+    // var activeTheme: Theme {
+    //     theme ?? .modern
+    // }
 }
 
 /// Output template configuration (loaded from html.yml, api.yml, etc.)
@@ -73,8 +74,9 @@ struct OutputTemplate: Codable {
     /// Get the view path for a specific layout name
     func viewPath(for layout: String?) -> String {
         if let layout = layout,
-           let layouts = layouts,
-           let customView = layouts[layout] {
+            let layouts = layouts,
+            let customView = layouts[layout]
+        {
             return customView
         }
         return view

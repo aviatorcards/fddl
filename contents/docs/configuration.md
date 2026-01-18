@@ -1,7 +1,10 @@
 ---
 title: "Configuration Reference"
 description: "Master the settings that drive your site generation."
-tags: ["doc", "configuration", "tutorial"]
+tags:
+  - doc
+  - configuration
+  - tutorial
 layout: doc
 ---
 

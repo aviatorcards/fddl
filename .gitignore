@@ -12,21 +12,23 @@ build/
 Package.resolved
 
 # Xcode
-xcuserdata/
+userdata/
 *.xcodeproj
 DerivedData/
 *.xcworkspace
 
 # Generated output
 output/
-
-# Build tracking
-.fddl-build
-
-# macOS
 .DS_Store
 .AppleDouble
 .LSOverride
+.claude
+.gemini
+.shsh
+*.db
+
+# Build tracking
+.fddl-build
 
 # Thumbnails
 ._*
@@ -43,10 +45,12 @@ output/
 # Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
-Network Trash Folder
-Temporary Items
+"Network Trash Folder"
+"Temporary Items"
 .apdisk
 .vscode/
 
 # Test files
 test-*.md
+fddl.code-workspace
+*.test

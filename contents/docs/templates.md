@@ -1,7 +1,10 @@
 ---
 title: "Templating Engine"
 description: "How to build and customize your own views."
-tags: ["doc", "templates", "advanced"]
+tags:
+  - doc
+  - templates
+  - advanced
 layout: doc
 ---
 

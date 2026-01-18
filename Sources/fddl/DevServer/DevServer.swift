@@ -29,14 +29,22 @@ class DevServer {
             .serverChannelOption(ChannelOptions.backlog, value: 256)
             .serverChannelOption(ChannelOptions.socketOption(.so_reuseaddr), value: 1)
             .childChannelInitializer { channel in
+                let upgraders = [self.createWebSocketUpgrader()]
+
                 let config = NIOHTTPServerUpgradeConfiguration(
-                    upgraders: [self.createWebSocketUpgrader()],
+                    upgraders: upgraders,
                     completionHandler: { context in
                         // HTTP upgrade completed, handler will be replaced by WebSocket handler
                     }
                 )
 
-                return channel.pipeline.configureHTTPServerPipeline(withServerUpgrade: config).flatMap {
+                return channel.pipeline.addHandler(HTTPResponseEncoder()).flatMap {
+                    channel.pipeline.addHandler(ByteToMessageHandler(HTTPRequestDecoder()))
+                }.flatMap {
+                    channel.pipeline.addHandler(HTTPServerProtocolErrorHandler())
+                }.flatMap {
+                    channel.pipeline.addHandler(HTTPServerUpgradeHandler(upgraders: upgraders, httpEncoder: HTTPResponseEncoder(), extraHTTPHandlers: [], upgradeCompletionHandler: config.completionHandler))
+                }.flatMap {
                     channel.pipeline.addHandler(HTTPHandler(documentRoot: self.documentRoot, server: self))
                 }
             }
@@ -130,14 +138,16 @@ final class HTTPHandler: ChannelInboundHandler {
 
     private func serveFile(context: ChannelHandlerContext, path: String) {
         var filePath = path
-        if filePath == "/" {
-            filePath = "/index.html"
+        
+        // Clean path (remove query string)
+        filePath = filePath.split(separator: "?")[0].description
+        
+        // Handle directory paths - append index.html
+        if filePath.hasSuffix("/") {
+            filePath += "index.html"
         }
 
-        // Clean path
-        filePath = filePath.split(separator: "?")[0].description
-
-        let fileURL = documentRoot.appendingPathComponent(filePath)
+        var fileURL = documentRoot.appendingPathComponent(filePath)
 
         // Security check: ensure file is within documentRoot
         guard fileURL.path.hasPrefix(documentRoot.path) else {
@@ -145,6 +155,15 @@ final class HTTPHandler: ChannelInboundHandler {
             return
         }
 
+        // Check if path is a directory, if so try to serve index.html
+        var isDirectory: ObjCBool = false
+        if FileManager.default.fileExists(atPath: fileURL.path, isDirectory: &isDirectory) {
+            if isDirectory.boolValue {
+                fileURL = fileURL.appendingPathComponent("index.html")
+                filePath = filePath + "/index.html"
+            }
+        }
+        
         // Try to read file
         guard FileManager.default.fileExists(atPath: fileURL.path) else {
             sendResponse(context: context, status: .notFound, body: "Not Found")
