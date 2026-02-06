@@ -8,8 +8,6 @@ tags:
   - swift
 ---
 
-# About Me
-
 Hey, I'm Tristan. I don't call myself anything because I don't like that. I spend my time trying to actively avoid interacting with capitalism in any way possible. My brain is pretty broken in the way that I vew the world comparitively to most people. I think people are deserving of food, shelter, housing, and access to healthcare. I can objectively see that capitalism is incompatible with any kind of prolonged existence for living beings. Infinite growth predicated on finite resources in a living organism is called cancer. This isn't me being edgy. This is an observation.
 
 ### Further Reading

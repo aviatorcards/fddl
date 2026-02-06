@@ -8,8 +8,6 @@ tags:
   - geocities
 ---
 
-# fddl Features
-
 This page demonstrates new features added to fddl.
 
 ## Syntax Highlighting
@@ -26,7 +24,7 @@ struct Person {
     }
 }
 
-let person = Person(name: "Web Developer", age: 25)
+let person = Person(name: "Name", age: 20)
 person.greet()
 ```
 

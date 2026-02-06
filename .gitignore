@@ -48,7 +48,7 @@ output/
 "Network Trash Folder"
 "Temporary Items"
 .apdisk
-.vscode/
+.vscode
 
 # Test files
 test-*.md

@@ -1,6 +1,6 @@
 ---
 title: "Rookery"
-description: "A Swift-based web application for managing code snippets with beautiful image generation powered by [freeze](https://github.com/charmbracelet/freeze)."
+description: "A Swift-based web application for managing code snippets with beautiful image generation powered by freeze"
 tags:
   - swift
   - vapor
@@ -8,8 +8,6 @@ tags:
   - web-application
 layout: project
 ---
-
-# Rookery
 
 **A colony of code fragments**
 

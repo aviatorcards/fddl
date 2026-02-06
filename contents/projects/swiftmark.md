@@ -8,8 +8,6 @@ tags:
 layout: project
 ---
 
-# SwiftMark
-
 SwiftMark is the core parsing & processing library behind `fddl`. It's designed to handle complex markdown structures with minimal memory allocation.
 
 ## Performance Benchmarks
