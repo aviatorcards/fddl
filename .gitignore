@@ -10,6 +10,7 @@ build/
 /.swiftpm
 .swiftpm/
 Package.resolved
+ROADMAP.md
 
 # Xcode
 userdata/
