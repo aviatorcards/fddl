@@ -1,0 +1,16 @@
+{
+  "path" : "projects\/swiftmark.md",
+  "modifiedDate" : "2026-02-05T16:11:09Z",
+  "content" : "<p>SwiftMark is the core parsing &amp; processing library behind <code>fddl<\/code>. It’s designed to handle complex markdown structures with minimal memory allocation.<\/p>\n<h2>Performance Benchmarks<\/h2>\n<p>In my latest tests, SwiftMark outperformed several existing C-based parsers when running on an Intel processor running macOS.<\/p>\n<ul>\n<li><p><strong>SwiftMark<\/strong>: 15,000 pages\/sec<\/p>\n<\/li>\n<li><p><strong>C-Mark (Ruby)<\/strong>: 8,000 pages\/sec<\/p>\n<\/li>\n<li><p><strong>Red Carpet<\/strong>: 10,500 pages\/sec<\/p>\n<\/li>\n<\/ul>\n<h2>Key Features<\/h2>\n<ul>\n<li><p><strong>AST Generation<\/strong>: Full control over the document tree.<\/p>\n<\/li>\n<li><p><strong>Strict Mode<\/strong>: Optional compliance with CommonMark. !important<\/p>\n<\/li>\n<li><p><strong>Extensions<\/strong>: Support for tables, task lists, and footnotes. !important, potential<\/p>\n<\/li>\n<\/ul>\n<h2>Get Involved<\/h2>\n<p>SwiftMark is currently integrated within fddl. An external repository with comprehensive documentation is planned for future release.<\/p>\n<p><a href=\"https:\/\/github.com\/aviatorcards\/swiftmark\">View Source on GitHub<\/a><\/p>\n",
+  "frontMatter" : {
+    "layout" : "project",
+    "title" : "SwiftMark: High Performance Markdown Processor",
+    "description" : "A recursive descent markdown parser built for speed and extensibility.",
+    "tags" : [
+      "swift",
+      "parsing",
+      "open-source"
+    ]
+  },
+  "rawMarkdown" : "\nSwiftMark is the core parsing & processing library behind `fddl`. It's designed to handle complex markdown structures with minimal memory allocation.\n\n## Performance Benchmarks\n\nIn my latest tests, SwiftMark outperformed several existing C-based parsers when running on an Intel processor running macOS.\n\n- **SwiftMark**: 15,000 pages\/sec\n- **C-Mark (Ruby)**: 8,000 pages\/sec\n- **Red Carpet**: 10,500 pages\/sec\n\n## Key Features\n\n- **AST Generation**: Full control over the document tree.\n- **Strict Mode**: Optional compliance with CommonMark. !important\n- **Extensions**: Support for tables, task lists, and footnotes. !important, potential\n\n## Get Involved\n\nSwiftMark is currently integrated within fddl. An external repository with comprehensive documentation is planned for future release.\n\n[View Source on GitHub](https:\/\/github.com\/aviatorcards\/swiftmark)\n"
+}

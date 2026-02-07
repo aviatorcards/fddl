@@ -5,6 +5,7 @@ layout: page
 tags:
   - contact
   - social
+date: 2025-10-01
 ---
 
 # Get in Touch

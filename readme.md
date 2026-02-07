@@ -161,18 +161,13 @@ contents/
     └── paris-trip.md
 ```
 
-## Future Features
-
-- API JSON output (api.yml)
-- 404 error page (404.yml)
-- Sitemap generation (sitemap.yml)
-- RSS 2.0 feed (rss.yml)
-- macOS Services menu integration
-- Watch mode and development server
-
 ## Requirements
 
 - Swift 5.10+
+
+## Roadmap
+
+See [ROADMAP.md](ROADMAP.md) for planned features and development progress.
 
 ## License
 

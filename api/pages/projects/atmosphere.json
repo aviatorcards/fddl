@@ -1,0 +1,16 @@
+{
+  "path" : "projects\/atmosphere.md",
+  "content" : "<h1>Atmosphere<\/h1>\n<p>Atmosphere is a lightweight, high-performance journaling app designed for speed and extensibility, built entirely in Swift.<\/p>\n<h2>SwiftMark Integration<\/h2>\n<p>At its core, Atmosphere leverages the <strong><a href=\"\/projects\/swiftmark.html\">SwiftMark Processor<\/a><\/strong>, a custom-built Markdown engine that provides real-time, high-fidelity rendering with minimal overhead.<\/p>\n<h3>Key Features<\/h3>\n<ul>\n<li><p><strong>Real-time Rendering<\/strong>: Instant feedback as you type using the SwiftMark engine.<\/p>\n<\/li>\n<li><p><strong>Custom Extensions<\/strong>: Easily extend the processor to support custom syntax and components.<\/p>\n<\/li>\n<li><p><strong>Native Performance<\/strong>: Built with SwiftUI for a fluid, responsive editing experience.<\/p>\n<\/li>\n<\/ul>\n<h2>Tech Stack<\/h2>\n<ul>\n<li><p><strong>Language<\/strong>: Swift<\/p>\n<\/li>\n<li><p><strong>UI Framework<\/strong>: SwiftUI<\/p>\n<\/li>\n<li><p><strong>Markdown Engine<\/strong>: SwiftMark Processor<\/p>\n<\/li>\n<\/ul>\n<p><a href=\"https:\/\/github.com\/aviatorcards\/atmosphere\">View Source on GitHub<\/a><\/p>\n<pre><code>\n<\/code><\/pre>\n",
+  "frontMatter" : {
+    "tags" : [
+      "swift",
+      "text-editor",
+      "markdown"
+    ],
+    "title" : "Atmosphere: Swift Journaling App",
+    "layout" : "project",
+    "description" : "A lightweight, high-performance journaling app powered by the SwiftMark Processor."
+  },
+  "modifiedDate" : "2026-01-18T04:21:19Z",
+  "rawMarkdown" : "\n# Atmosphere\n\nAtmosphere is a lightweight, high-performance journaling app designed for speed and extensibility, built entirely in Swift.\n\n## SwiftMark Integration\n\nAt its core, Atmosphere leverages the **[SwiftMark Processor](\/projects\/swiftmark.html)**, a custom-built Markdown engine that provides real-time, high-fidelity rendering with minimal overhead.\n\n### Key Features\n\n- **Real-time Rendering**: Instant feedback as you type using the SwiftMark engine.\n- **Custom Extensions**: Easily extend the processor to support custom syntax and components.\n- **Native Performance**: Built with SwiftUI for a fluid, responsive editing experience.\n\n## Tech Stack\n\n- **Language**: Swift\n- **UI Framework**: SwiftUI\n- **Markdown Engine**: SwiftMark Processor\n\n[View Source on GitHub](https:\/\/github.com\/aviatorcards\/atmosphere)\n\n```\n\n```\n"
+}

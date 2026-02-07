@@ -1,0 +1,15 @@
+{
+  "path" : "contact.md",
+  "modifiedDate" : "2026-01-18T04:03:37Z",
+  "content" : "<h1>Get in Touch<\/h1>\n<p>Have questions or comments? Have an idea for a feature? Submit a pull request!<\/p>\n<h2>Ways to Connect<\/h2>\n<h3>Email<\/h3>\n<p>The best way to reach me is via email:<\/p>\n<p><strong>tristan@fddl.dev<\/strong><\/p>\n<h3>GitHub<\/h3>\n<p>Find me on GitHub for code-related questions and contributions:<\/p>\n<p><strong>github.com\/aviatorcards<\/strong><\/p>\n<h3>Social Media<\/h3>\n<ul>\n<li><p><strong>Twitter<\/strong>: @aviatorcards<\/p>\n<\/li>\n<li><p><strong>LinkedIn<\/strong>: linkedin.com\/in\/tristan-6a160b3a2 <strong>Note:<\/strong> LinkedIn is a cesspool.<\/p>\n<\/li>\n<li><p><strong>Bluesky<\/strong>: @fddl.dev<\/p>\n<\/li>\n<\/ul>\n<h2>Found a Bug?<\/h2>\n<p>Neat! I like bugs!<\/p>\n<p><strong>github.com\/aviatorcards\/fddl\/issues<\/strong><\/p>\n<h2>Want to Contribute?<\/h2>\n<p>Neat! I like bugs!<\/p>\n<p>Thanks for your interest in fddl!<\/p>\n",
+  "frontMatter" : {
+    "layout" : "page",
+    "title" : "Contact",
+    "description" : "Get in touch",
+    "tags" : [
+      "contact",
+      "social"
+    ]
+  },
+  "rawMarkdown" : "\n# Get in Touch\n\nHave questions or comments? Have an idea for a feature? Submit a pull request!\n\n## Ways to Connect\n\n### Email\n\nThe best way to reach me is via email:\n\n**tristan@fddl.dev**\n\n### GitHub\n\nFind me on GitHub for code-related questions and contributions:\n\n**github.com\/aviatorcards**\n\n### Social Media\n\n- **Twitter**: @aviatorcards\n- **LinkedIn**: linkedin.com\/in\/tristan-6a160b3a2 **Note:** LinkedIn is a cesspool.\n- **Bluesky**: @fddl.dev\n\n## Found a Bug?\n\nNeat! I like bugs!\n\n**github.com\/aviatorcards\/fddl\/issues**\n\n## Want to Contribute?\n\nNeat! I like bugs!\n\n---\n\nThanks for your interest in fddl!\n"
+}

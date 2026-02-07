@@ -4,6 +4,8 @@ description: "Default fddl template"
 defaultLayout: "page"
 outputs:
   - html
+  - api
+  - notFound
 navigation:
   - label: "Home"
     url: "/"
@@ -72,3 +74,8 @@ plugins:
     enabled: true
     options:
       words_per_minute: "200"
+
+  - identifier: "robots"
+    enabled: true
+    options:
+      site_url: "https://example.com"

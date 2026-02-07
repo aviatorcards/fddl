@@ -275,6 +275,42 @@ public class ReadingTimePlugin: Plugin {
     }
 }
 
+// MARK: - Robots Plugin
+
+/// Generates robots.txt for search engines
+public class RobotsPlugin: Plugin {
+    public let identifier = "robots"
+    public let name = "fddl Robots Generator"
+    public let version = "0.5.0"
+    public let description = "Generates robots.txt for search engines"
+
+    private let config: PluginConfig
+
+    public required init(config: PluginConfig) {
+        self.config = config
+    }
+
+    public func afterBuild(context: PluginContext) throws {
+        let siteURL = config.options?["site_url"] ?? "https://example.com"
+        let userAgent = config.options?["user_agent"] ?? "*"
+        let allow = config.options?["allow"] ?? "/"
+        let disallow = config.options?["disallow"] ?? ""
+
+        let outputPath = context.outputDirectory.appendingPathComponent("robots.txt")
+
+        let content = """
+            User-agent: \(userAgent)
+            Allow: \(allow)
+            Disallow: \(disallow)
+
+            Sitemap: \(siteURL)/sitemap.xml
+            """
+
+        try content.write(to: outputPath, atomically: true, encoding: .utf8)
+        print("  ✓ Generated robots.txt")
+    }
+}
+
 // MARK: - Helper Extensions
 
 extension String {

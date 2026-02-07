@@ -75,24 +75,42 @@ class SiteGenerator {
             generatedDate: Date()
         )
 
-        // 7. Generate HTML output
-        print("\nGenerating HTML output...")
-        let htmlRenderer = HTMLRenderer(templateEngine: templateEngine, pluginManager: pluginManager)
-        try htmlRenderer.render(site: site, to: workingDirectory)
+        // 7. Generate outputs based on configuration
+        for output in templateConfig.outputs {
+            switch output {
+            case "html":
+                print("\nGenerating HTML output...")
+                let htmlRenderer = HTMLRenderer(templateEngine: templateEngine, pluginManager: pluginManager)
+                try htmlRenderer.render(site: site, to: workingDirectory)
 
-        // 8. Generate directory index pages
-        print("\nGenerating directory indexes...")
-        let htmlTemplate = try templateEngine.loadOutputTemplate(named: "html")
-        let htmlOutputDirectory = workingDirectory.appendingPathComponent(htmlTemplate.outputPath)
-        let indexGenerator = IndexGenerator(templateEngine: templateEngine, outputTemplate: htmlTemplate)
-        try indexGenerator.generateIndexPages(for: site, outputDirectory: htmlOutputDirectory)
+                // Generate directory index pages
+                print("\nGenerating directory indexes...")
+                let htmlTemplate = try templateEngine.loadOutputTemplate(named: "html")
+                let htmlOutputDirectory = workingDirectory.appendingPathComponent(htmlTemplate.outputPath)
+                let indexGenerator = IndexGenerator(templateEngine: templateEngine, outputTemplate: htmlTemplate)
+                try indexGenerator.generateIndexPages(for: site, outputDirectory: htmlOutputDirectory)
 
-        // 9. Generate taxonomy pages (tags)
-        print("\nGenerating tag pages...")
-        let taxonomyGenerator = TaxonomyGenerator(templateEngine: templateEngine, outputTemplate: htmlTemplate)
-        try taxonomyGenerator.generateTagPages(for: site, outputDirectory: htmlOutputDirectory)
+                // Generate taxonomy pages (tags)
+                print("\nGenerating tag pages...")
+                let taxonomyGenerator = TaxonomyGenerator(templateEngine: templateEngine, outputTemplate: htmlTemplate)
+                try taxonomyGenerator.generateTagPages(for: site, outputDirectory: htmlOutputDirectory)
 
-        // 10. Copy assets
+            case "api":
+                print("\nGenerating JSON API...")
+                let jsonRenderer = JSONRenderer(templateEngine: templateEngine)
+                try jsonRenderer.render(site: site, to: workingDirectory)
+
+            case "notFound", "404":
+                print("\nGenerating 404 page...")
+                let notFoundRenderer = NotFoundRenderer(templateEngine: templateEngine, pluginManager: pluginManager)
+                try notFoundRenderer.render(site: site, to: workingDirectory)
+
+            default:
+                print("\n⚠️ Unknown output format: \(output)")
+            }
+        }
+
+        // 8. Copy assets
         print("\nCopying assets...")
         let assetCopier = AssetCopier()
         let assetsSource = templateDir.appendingPathComponent("assets")

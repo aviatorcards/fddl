@@ -6,6 +6,7 @@ tags:
   - parsing
   - open-source
 layout: project
+date: 2025-12-14
 ---
 
 SwiftMark is the core parsing & processing library behind `fddl`. It's designed to handle complex markdown structures with minimal memory allocation.

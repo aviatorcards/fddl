@@ -1,0 +1,4 @@
+format: api
+extension: .json
+outputPath: "output/api"
+view: "api.json"

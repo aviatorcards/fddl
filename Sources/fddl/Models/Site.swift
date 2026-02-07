@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents the entire static site with all pages and configuration
-struct Site {
+struct Site: Codable {
     /// All pages in the site
     let pages: [Page]
 
@@ -16,6 +16,14 @@ struct Site {
 
     /// Date when the site was generated
     let generatedDate: Date
+
+    enum CodingKeys: String, CodingKey {
+        case pages
+        case configuration
+        case buildID
+        case commitHash
+        case generatedDate
+    }
 
     /// Formatted generation date string
     var formattedDate: String {

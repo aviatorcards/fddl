@@ -1,0 +1,19 @@
+{
+  "path" : "projects\/bethany-rhodes-com.md",
+  "frontMatter" : {
+    "date" : "2026-01-19T00:00:00Z",
+    "title" : "bethanyrhodes.com",
+    "tags" : [
+      "open-source",
+      "eleventy",
+      "nunjucks",
+      "webdev",
+      "music"
+    ],
+    "layout" : "project",
+    "description" : "The personal website of Bethany Rhodes."
+  },
+  "rawMarkdown" : "\n[bethanyrhodes.com](https:\/\/bethanyrhodes.com) is a modern, modular static website built for Bethany Rhodes. It serves as a central hub for her music, performances, and events.\n\n### Tech Stack\n\n- **[Eleventy (11ty)](https:\/\/www.11ty.dev\/)**: Flexible static site generator used for performance and modularity.\n- **[Nunjucks](https:\/\/nunjucks.dev\/)**: Templating engine for building complex, reusable layouts.\n- **Vanilla CSS**: Custom styling with CSS variables for a maintainable design system.\n- **EmailJS (Work in progress)**: Integrated for handling contact form submissions without a backend.\n\n### Key Features\n\n- **Dynamic Events System**: Automatically sorts and categorizes performances into \"Upcoming\" and \"Past\" events using Eleventy collections.\n- **Modular Content**: Easy management of videos, music releases, and news through Markdown-based data files.\n- **Responsive Layout**: Mobile-first design ensuring a seamless experience across all device sizes.\n- **SEO Optimized**: Semantic HTML and proper metadata management for search engine visibility.\n\n### Content Structure\n\nThe project follows a modular architecture where content is decoupled from logic:\n\n- `src\/_layouts`: Base templates for consistent branding.\n- `src\/events`: individual markdown files for gig data.\n- `src\/videos-data`: Video references and metadata.\n- `src\/js\/contact.js`: client-side logic for the EmailJS integration.\n",
+  "modifiedDate" : "2026-02-05T16:11:42Z",
+  "content" : "<p><a href=\"https:\/\/bethanyrhodes.com\">bethanyrhodes.com<\/a> is a modern, modular static website built for Bethany Rhodes. It serves as a central hub for her music, performances, and events.<\/p>\n<h3>Tech Stack<\/h3>\n<ul>\n<li><p><strong><a href=\"https:\/\/www.11ty.dev\/\">Eleventy (11ty)<\/a><\/strong>: Flexible static site generator used for performance and modularity.<\/p>\n<\/li>\n<li><p><strong><a href=\"https:\/\/nunjucks.dev\/\">Nunjucks<\/a><\/strong>: Templating engine for building complex, reusable layouts.<\/p>\n<\/li>\n<li><p><strong>Vanilla CSS<\/strong>: Custom styling with CSS variables for a maintainable design system.<\/p>\n<\/li>\n<li><p><strong>EmailJS (Work in progress)<\/strong>: Integrated for handling contact form submissions without a backend.<\/p>\n<\/li>\n<\/ul>\n<h3>Key Features<\/h3>\n<ul>\n<li><p><strong>Dynamic Events System<\/strong>: Automatically sorts and categorizes performances into “Upcoming” and “Past” events using Eleventy collections.<\/p>\n<\/li>\n<li><p><strong>Modular Content<\/strong>: Easy management of videos, music releases, and news through Markdown-based data files.<\/p>\n<\/li>\n<li><p><strong>Responsive Layout<\/strong>: Mobile-first design ensuring a seamless experience across all device sizes.<\/p>\n<\/li>\n<li><p><strong>SEO Optimized<\/strong>: Semantic HTML and proper metadata management for search engine visibility.<\/p>\n<\/li>\n<\/ul>\n<h3>Content Structure<\/h3>\n<p>The project follows a modular architecture where content is decoupled from logic:<\/p>\n<ul>\n<li><p><code>src\/_layouts<\/code>: Base templates for consistent branding.<\/p>\n<\/li>\n<li><p><code>src\/events<\/code>: individual markdown files for gig data.<\/p>\n<\/li>\n<li><p><code>src\/videos-data<\/code>: Video references and metadata.<\/p>\n<\/li>\n<li><p><code>src\/js\/contact.js<\/code>: client-side logic for the EmailJS integration.<\/p>\n<\/li>\n<\/ul>\n"
+}

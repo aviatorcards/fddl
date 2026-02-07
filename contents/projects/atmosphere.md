@@ -6,11 +6,12 @@ tags:
   - text-editor
   - markdown
 layout: project
+date: 2025-10-01
 ---
 
 # Atmosphere
 
-Atmosphere is a lightweight, high-performance journaling app designed for speed and extensibility, built entirely in Swift.
+Atmosphere is a lightweight, high-performance journaling app designed for speed and extensibility, built with Swift.
 
 ## SwiftMark Integration
 

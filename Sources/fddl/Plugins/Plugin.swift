@@ -110,6 +110,7 @@ public class PluginRegistry {
         register(identifier: "search", factory: SearchIndexPlugin.init)
         register(identifier: "analytics", factory: AnalyticsPlugin.init)
         register(identifier: "reading-time", factory: ReadingTimePlugin.init)
+        register(identifier: "robots", factory: RobotsPlugin.init)
     }
 
     /// Register a plugin factory

@@ -1,7 +1,7 @@
 import Foundation
 
 /// Represents a single markdown page with its metadata and content
-public struct Page {
+public struct Page: Codable {
     /// Relative path from the contents directory
     public let path: String
 
@@ -16,6 +16,14 @@ public struct Page {
 
     /// File modification date
     public let modifiedDate: Date
+
+    enum CodingKeys: String, CodingKey {
+        case path
+        case frontMatter
+        case content
+        case rawMarkdown
+        case modifiedDate
+    }
 
     /// Computed URL path for the generated HTML file
     public var urlPath: String {

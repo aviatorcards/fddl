@@ -1,0 +1,4 @@
+format: notFound
+extension: .html
+outputPath: "output"
+view: "views/404.html"

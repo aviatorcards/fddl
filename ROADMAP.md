@@ -1,175 +1,75 @@
-# FDDL Roadmap
+# fddl Roadmap
 
-FDDL is a markdown-based static site generator written in Swift, built as a learning project with NotebookLM.
+This document outlines the planned features and development path for **fddl**, the markdown-based static site generator.
 
-## Related Projects
+## Status: 🟢 Active Development
 
-- **[SwiftMark](../swiftmark)** - Markdown library with similar features (potential integration)
-- **[Atmosphere](../atmosphere)** - Journaling app that uses SwiftMark
-
----
-
-## Current State
-
-FDDL is a functional static site generator with:
-
-- Markdown processing with YAML frontmatter
-- Template system with variable substitution
-- Shortcodes (YouTube, alerts, retro effects)
-- Plugin architecture (sitemaps, RSS, search)
-- CLI interface
-- Dev server with hot reload
-
-**Current Dependencies**:
-
-- swift-markdown (Apple's parser)
-- Yams (YAML parsing)
-- Splash (Swift syntax highlighting)
-- swift-nio (dev server)
+fddl is currently a functional tool used for learning Swift and building personal projects. While it is feature-rich, it is still evolving towards a "production-ready" 1.0 release.
 
 ---
 
-## Potential SwiftMark Integration
+## ✅ Completed Features
 
-### Current Situation
+### Core Engine
+- **Markdown Processing**: High-performance markdown to HTML conversion via SwiftMarkdown.
+- **YAML Frontmatter**: Support for metadata in markdown files.
+- **Variable Substitution**: Simple `{{page.title}}` style variables in templates.
+- **Asset Management**: Automatic synchronization of CSS, JS, and images.
+- **Build Tracking**: Automatic build number increments and generation timestamps.
 
-FDDL uses swift-markdown directly, while SwiftMark is a wrapper around swift-markdown with additional features.
+### Built-in Plugins
+- **Sitemap Generator**: Automatic `sitemap.xml` generation for SEO.
+- **RSS 2.0 Feed**: Generate feeds for your blog or project updates.
+- **Search Index**: JSON index for client-side search functionality.
+- **Analytics Injector**: Easy integration of Google Analytics or Plausible.
+- **Reading Time**: Automatic calculation and injection of "min read" indicators.
+- **API JSON Output**: Generate `site.json` and individual page JSON files for headless usage.
+- **Custom 404 Pages**: Support for generating dedicated error pages.
+- **robots.txt Generator**: Automatic `robots.txt` generation via plugin.
 
-### Evaluation Needed
+### Developer Experience
+- **Dev Server**: Built-in HTTP server with NIO.
+- **Live Reload**: Instant browser refresh on content or template changes via WebSockets.
+- **CLI Tool**: Intuitive command-line interface powered by Swift Argument Parser.
+- **Watch Mode**: Automatic rebuilding when files change.
 
-- [ ] Compare FDDL's markdown processing with SwiftMark's capabilities
-- [ ] Identify any FDDL-specific features not in SwiftMark
-- [ ] Evaluate if switching would simplify FDDL's codebase
-- [ ] Consider if shared improvements would benefit both projects
-
-### Potential Benefits of Integration
-
-- **Consistency**: Single markdown processor across all projects
-- **Shared Improvements**: SwiftMark enhancements automatically benefit FDDL
-- **Reduced Duplication**: Less code to maintain
-- **Community**: SwiftMark improvements from others benefit FDDL
-
-### Potential Drawbacks
-
-- **Dependency**: Adds another layer of abstraction
-- **Flexibility**: May lose some FDDL-specific customizations
-- **Complexity**: Migration effort required
-
-**Decision**: Evaluate when SwiftMark reaches feature parity with FDDL's needs
-
----
-
-## FDDL-Specific Improvements
-
-### 1. Dev Server Enhancements
-
-**Priority**: Medium | **Effort**: Medium
-
-- [ ] Improve hot reload reliability
-- [ ] Add live preview in browser
-- [ ] Better error reporting during development
-- [ ] Watch mode for automatic rebuilds
+### Deployment
+- **Neocities Integration**: First-class support for deploying to Neocities with API key authentication.
 
 ---
 
-### 2. Plugin System Expansion
+## 🛠 Short-Term Goals (v0.6 - v0.8)
 
-**Priority**: Low | **Effort**: Medium
+### Template System Enhancements
+- [ ] **Template Partials**: Support for reusable components (header, footer, etc.) across views.
+- [ ] **Conditional Logic**: Basic `if/else` support in templates.
+- [ ] **Loops**: Ability to loop over lists of pages in any view (currently restricted to index pages).
+- [ ] **More Built-in Themes**: Expand the library of high-quality, responsive templates.
 
-- [ ] API JSON output (api.yml)
-- [ ] 404 error page generation
-- [ ] Sitemap generation improvements
-- [ ] RSS 2.0 feed enhancements
-- [ ] Search index optimization
-
----
-
-### 3. Template System Improvements
-
-**Priority**: Low | **Effort**: Medium
-
-- [ ] More flexible variable substitution
-- [ ] Conditional rendering
-- [ ] Loops for generating lists
-- [ ] Partial templates for reusability
+### Image Optimization
+- [ ] **Automatic Image Processing**: Resize, compress, and convert images to WebP during build.
+- [ ] **Responsive Images**: Generate `<picture>` tags automatically.
 
 ---
 
-### 4. macOS Services Integration
+## 🚀 Long-Term Vision (v1.0 and Beyond)
 
-**Priority**: Low | **Effort**: Low
+### Extensibility
+- [ ] **External Plugin System**: Allow users to write and use plugins without modifying fddl core.
+- [ ] **Shell Script Hooks**: Trigger custom scripts before or after build stages.
 
-- [ ] Add to macOS Services menu
-- [ ] Quick actions for markdown files
-- [ ] Right-click context menu integration
+### Platform Support
+- [ ] **macOS Services Integration**: Right-click a folder to "Generate Site".
+- [ ] **Desktop GUI**: A companion app for people who prefer a visual interface over the CLI.
+- [ ] **More Deployment Adapters**: Support for GitHub Pages (Actions), Netlify, and Vercel.
 
----
-
-## Frontmatter Pattern (Already Established)
-
-FDDL uses YAML frontmatter consistently:
-
-```markdown
----
-title: "Entry Title"
-description: "Brief description"
-date: 2026-02-06
-tags: [tag1, tag2, tag3]
-layout: post
-custom_field: "custom value"
----
-
-# Content starts here
-```
-
-**This pattern is being adopted by**:
-
-- Atmosphere (for journal entries)
-- Any future projects using SwiftMark
-
-**Benefits**:
-
-- Consistent metadata across projects
-- Portable content
-- Extensible with custom fields
+### Advanced Features
+- [ ] **Incremental Builds**: Only rebuild pages that have actually changed.
+- [ ] **Full-Text Search**: More robust search options, potentially server-side for larger sites.
+- [ ] **Internationalization (i18n)**: Better support for multi-lingual websites.
 
 ---
 
-## Relationship to Other Projects
+## 💡 Contributing
 
-### Atmosphere
-
-- Atmosphere uses SwiftMark for markdown processing
-- Could potentially export journal entries as FDDL-compatible markdown files
-- Shared frontmatter pattern enables interoperability
-- Atmosphere entries could become blog posts via FDDL
-
-### SwiftMark
-
-- FDDL could switch to SwiftMark for consistency
-- Would benefit from SwiftMark's improvements
-- Could contribute FDDL-specific features back to SwiftMark
-- Evaluation needed to determine fit
-
----
-
-## Questions to Consider
-
-1. **SwiftMark Integration**: Would switching to SwiftMark simplify or complicate FDDL?
-2. **Feature Parity**: Does SwiftMark support all of FDDL's markdown needs?
-3. **Performance**: Would SwiftMark maintain FDDL's build speed?
-4. **Customization**: Can SwiftMark be extended for FDDL-specific features?
-
----
-
-## Quick Wins
-
-Current FDDL improvements (independent of SwiftMark decision):
-
-1. Improve dev server hot reload
-2. Enhance error reporting
-3. Add more template flexibility
-
----
-
-For the complete integration roadmap across all projects, see the main [integration analysis](../../.gemini/antigravity/brain/8914a23f-0057-4b15-b75d-ddcbf17aaf03/roadmap.md).
+Have an idea for a feature or found a bug? Please open an issue or submit a pull request!
