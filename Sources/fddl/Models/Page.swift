@@ -1,22 +1,25 @@
 import Foundation
+import SwiftMark
 
-/// Represents a single markdown page with its metadata and content
-public struct Page: Codable {
-    /// Relative path from the contents directory
-    public let path: String
+// Re-export SwiftMark's Page type
+public typealias Page = SwiftMark.Page
 
-    /// Metadata extracted from YAML frontmatter
-    public let frontMatter: FrontMatter
+// Re-export SwiftMark's FrontMatter type
+public typealias FrontMatter = SwiftMark.FrontMatter
 
-    /// Rendered HTML content from markdown
-    public let content: String
+// Re-export SwiftMark's MarkdownProcessor type
+public typealias MarkdownProcessor = SwiftMark.MarkdownProcessor
 
-    /// Original markdown source
-    public let rawMarkdown: String
+/// fddl-specific extensions for Page
+extension SwiftMark.Page {
+    /// Computed URL path for the generated HTML file
+    public var urlPath: String {
+        path.replacingOccurrences(of: ".md", with: ".html")
+    }
+}
 
-    /// File modification date
-    public let modifiedDate: Date
-
+/// Extension to add Codable conformance to SwiftMark's Page
+extension SwiftMark.Page: @retroactive Codable {
     enum CodingKeys: String, CodingKey {
         case path
         case frontMatter
@@ -25,21 +28,29 @@ public struct Page: Codable {
         case modifiedDate
     }
 
-    /// Computed URL path for the generated HTML file
-    public var urlPath: String {
-        path.replacingOccurrences(of: ".md", with: ".html")
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let path = try container.decode(String.self, forKey: .path)
+        let frontMatter = try container.decode(SwiftMark.FrontMatter.self, forKey: .frontMatter)
+        let content = try container.decode(String.self, forKey: .content)
+        let rawMarkdown = try container.decode(String.self, forKey: .rawMarkdown)
+        let modifiedDate = try container.decode(Date.self, forKey: .modifiedDate)
+
+        self.init(
+            path: path,
+            frontMatter: frontMatter,
+            content: content,
+            rawMarkdown: rawMarkdown,
+            modifiedDate: modifiedDate
+        )
     }
 
-    /// Display title (from frontmatter or derived from filename)
-    public var displayTitle: String {
-        if let title = frontMatter.title {
-            return title
-        }
-        // Derive from filename
-        let filename = (path as NSString).lastPathComponent
-        return filename.replacingOccurrences(of: ".md", with: "")
-            .replacingOccurrences(of: "-", with: " ")
-            .replacingOccurrences(of: "_", with: " ")
-            .capitalized
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(path, forKey: .path)
+        try container.encode(frontMatter, forKey: .frontMatter)
+        try container.encode(content, forKey: .content)
+        try container.encode(rawMarkdown, forKey: .rawMarkdown)
+        try container.encode(modifiedDate, forKey: .modifiedDate)
     }
 }

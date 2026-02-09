@@ -52,7 +52,7 @@ Swift brings modern programming paradigms to systems-level performance:
 
 ### 4. Excellent Tooling
 
-The Swift Package Manager (SPM) makes dependency management straightforward. No separate build tools, no complex configuration—just a clean `Package.swift` file.
+The Swift Package Manager makes dependency management straightforward. No separate build tools, no complex configuration—just a clean `Package.swift` file.
 
 ## The Dependencies That Power fddl
 
@@ -147,7 +147,7 @@ Each module has a clear responsibility, making the codebase maintainable and ext
 
 Thanks to Swift's performance characteristics, fddl can:
 
-- Generate thousands of pages in milliseconds
+- Generate thousands of pages in milliseconds - probably. I haven't actually tested this.
 - Process markdown with minimal overhead
 - Handle concurrent file operations safely
 - Serve development previews with low latency
@@ -160,21 +160,6 @@ By choosing Swift, fddl benefits from:
 - **Strong Community**: Growing beyond just iOS development
 - **Cross-Platform**: Works on macOS, Linux, and (experimentally) Windows
 - **Professional Tooling**: Xcode, LSP support, excellent debugging
-
-## Is Swift Right for Your CLI Tool?
-
-If you're building developer tools and you value:
-
-- Compile-time safety over scripting flexibility
-- High performance without manual memory management
-- Modern language features with systems-level control
-- A growing ecosystem of quality packages
-
-Then Swift might be the perfect choice.
-
-## What's Next?
-
-In our next post, we'll explore fddl's features in detail—from shortcodes and plugins to the template system and dev server.
 
 > "Swift is not just for apps. It's for anything you want to build." — The fddl philosophy
 
